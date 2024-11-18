@@ -1,0 +1,12 @@
+[Unit]
+Description=Semaphore Service
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker start -a semaphore
+ExecStop=/usr/bin/docker stop semaphore
+
+[Install]
+WantedBy=multi-user.target

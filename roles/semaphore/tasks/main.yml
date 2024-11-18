@@ -1,0 +1,22 @@
+---
+- name: Pull Semaphore Docker image
+  docker_image:
+    name: semaphoreui/semaphore
+    tag: latest
+    source: pull
+
+- name: Run Semaphore container
+  docker_container:
+    name: semaphore
+    image: semaphoreui/semaphore:latest
+    state: started
+    restart_policy: unless-stopped
+    ports:
+      - "3000:3000"
+    env:
+      DB_TYPE: postgres
+      DB_HOST: localhost
+      DB_PORT: "5432"
+      DB_USER: semaphore
+      DB_PASS: semaphorepassword
+      DB_NAME: semaphore
